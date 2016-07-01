@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    {% block head %}
+    <title>{{ name }}</title>
+    <!-- link to main stylesheet -->
+    <link rel="stylesheet" type="text/css" href="/static/css/main.css">
+    <script src='/static/lib/javascript/hyphenate.js' type="text/javascript"></script>
+    <script src='/static/lib/javascript/jquery-2.2.4.min.js' type="text/javascript"></script>
+    <script src='/static/javascript/nav-dropdown.js' type="text/javascript" charset="utf-8"></script>
+    {% assets "scss_all" %}
+    <link rel=stylesheet type=text/css href="{{ ASSET_URL }}">
+    {% endassets %}
+    {% endblock %}
+  </head>
+  <body>
+    {% block navbar %}
+    <section class="navigation">
+      <div class="nav-container">
+        <nav>
+          <div class="nav-mobile"><a id="nav-toggle" href="#!"><span></span></a></div>
+          <ul class="nav-list">
+            <li><a href="/">Home</a></li>
+            <li>
+              <a href="#!">Sensoren</a>
+              <ul class="nav-dropdown">
+                <li><a href="/sensoren.html">Bilder</a></li>
+                <li><a href="/uebersicht.html">Übersicht</a></li>
+                {% for sensor in categories %}
+                <li><a href="/sensoren/{{ sensor.url }}">‣ {{ sensor.name }}</a></li>
+                {% endfor %}
+              </ul>
+            </li>
+            <li>
+              <a href="/about">About</a>
+            </li>
+            <li>
+              <a href="kontakt.html">Kontakt</a>
+            </li>
+          </ul>
+        </nav>
+        <br>
+        <a href="http://www.mpa.uni-stuttgart.de" target="_blank"><img src="/static/images/mpa_logo.png" height="35px" align="right"></a>
+      </div>
+    </section>
+    {% endblock %}
+    <hr>
+
+    <div id="hyphenate">
+      {% block content %}
+      {% endblock %}
+    </div>
+
+    </div>
+    <footer>
+      {% block footer%}
+      <ul>
+        <li><a href="mailto:Bruecke.Monitoring@mpa.uni-stuttgart.de">email</a></li>
+        <li><a href="https://stuttgarter-bruecke.github.io">stuttgarter-bruecke.github.io</a></li>
+      </ul>
+      Abteilung Holzkonstruktionen, Materialprüfungsanstalt (MPA)<br>
+      Universität Stuttgart ‒ 2016
+      {% endblock %}
+    </footer>
+  </body>
+</html>

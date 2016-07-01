@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+{% block head %}
+<link rel="stylesheet" type="text/css" href="/static/css/bootstrap.min.css">
+{{ super() }}
+{% endblock %}
+{% block content %}
+<h1>{{ name }}</h1>
+<p>Diese Seite dokumentiert das Monitoring der Stuttgarter Brücke.</p>
+
+<!-- Set the variable for the sensor-->
+<script type="text/javascript">
+var currentSensor = '{{ plot_data[2] }}';
+</script>
+
+<script data-main="/static/javascript/plot2" src="/static/lib/javascript/require.js"></script>
+<div id="chart"></div>
+{% endblock %}
+
+{% block footer%}
+{{ super() }}
+{% endblock %}
+
