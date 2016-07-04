@@ -113,6 +113,13 @@ svg {
   shape-rendering: crispEdges;
 }
 
+.brushFocus .extent {
+  stroke: #fff;
+  fill: steelblue;
+  fill-opacity: .125;
+  shape-rendering: crispEdges;
+}
+
 .line.highlight {
     fill-opacity: 1;
     stroke-opacity: 1;
@@ -127,4 +134,24 @@ svg {
 .line.fadeout {
     fill-opacity: 0.2;
     stroke-opacity: 0.2;
+}
+
+.overlay {
+    fill: none;
+    stroke: none;
+    pointer-events: all;
+}
+
+.focusLine {
+    fill: none;
+    stroke: black;
+    stroke-width: 0.8px;
+}
+
+.focusCircle {
+    fill: red;
+}
+
+.tick line {
+    opacity: 0.2;
 }
