@@ -5,7 +5,10 @@
 {% endblock %}
 {% block content %}
 <h1>{{ name }}</h1>
-<p>Diese Seite dokumentiert das Monitoring der Stuttgarter Brücke.</p>
+
+<div>
+<p>Letzte Aktualisierung: <span class="aktualisierung"></span> </p>
+</div>
 
 <!-- Set the variable for the sensor-->
 <script type="text/javascript">
@@ -14,6 +17,37 @@ var currentSensor = '{{ plot_data[2] }}';
 
 <script data-main="/static/javascript/plot2" src="/static/lib/javascript/require.js"></script>
 <div id="chart"></div>
+
+<!-- Description of the sensors -->
+
+<hr>
+<script>
+
+$(document).ready(function(){
+    $("#hide").click(function(){
+        $("#description").slideUp("slow");
+        $("#hide").hide();
+        $("#show").show();
+    });
+    $("#show").click(function(){
+        $("#description").slideDown("slow");
+        $("#show").hide();
+        $("#hide").show();
+    });
+});
+
+</script>
+
+
+<div>
+<button id="hide" style="display:none">Hide description</button>
+<button id="show">Show description</button>
+</div>
+
+<div id="description" style="display:none">
+{{ description|safe }}
+</div>
+
 {% endblock %}
 
 {% block footer%}
