@@ -111,6 +111,7 @@ function(d3, queue, $, _) {
       d.date = parseDate(d.timestamp);
     });
 
+    // Last date of update is printed to the page
     var lastUpdate = data[data.length-1].date;
     $('.aktualisierung').html(lastUpdate);
 
