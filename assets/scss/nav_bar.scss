@@ -1,7 +1,7 @@
 // Navigation Variables
 $content-width: 100%;
 $breakpoint: 800px;
-$nav-height: 70px;
+$nav-height: 60px;
 $nav-background: #ffffff;
 $nav-font-color: #888888;
 $link-hover-color: #72cdf6;
@@ -33,7 +33,7 @@ $link-hover-color: #72cdf6;
   margin: 0 auto;
 }
 
-// Navigation 
+// Navigation
 nav {
   float: left;
   ul {
@@ -162,7 +162,7 @@ nav {
   }
 }
 
-// Page content 
+// Page content
 article {
   max-width: $content-width;
   margin: 0 auto;

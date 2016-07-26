@@ -83,8 +83,22 @@ def sensoren(url=None):
 
     """
     name = sensors_dict[url]
+    # Read file with the description of the sensor
+    try:
+        # Set name of the file
+        description_file = "static/content/descriptions/"+url+".html"
+        # Open the file
+        description_buff = open(description_file, 'r')
+        # Read file as string, replacing "\n" with ""
+        description_str = description_buff.read().replace('\n', '')
+        # Close the buffer
+        description_buff.close()
+    except:
+        # If there is no description, then use an empty screen
+        description_str = "Keine Beschreibung verfügbar."
+
     return render_template("sensor.html", name=name, categories=sensors,
-            plot_data=sensors_props[name])
+            plot_data=sensors_props[name], description=description_str)
 
 @app.route("/daten/<table>_<zoom>")
 def export_json(table=None, zoom=None):
@@ -102,17 +116,12 @@ def export_json(table=None, zoom=None):
     sqlString = "SELECT * FROM " + table
     # create data frame
     df_sql = pd.read_sql(sql=sqlString ,con=rv)
-    #df_sql['index'] = df_sql['index'].apply(dateutil.parser.parse, dayfirst=False)
-    col_1 = df_sql.columns[1]
-    col_2 = df_sql.columns[2]
-    col_3 = df_sql.columns[3]
     #df_sql = df_sql[['timestamp', col_1, col_2, col_3]][0:7000:int(zoom)]
     df_sql = df_sql[0:-1:int(zoom)]
     # export data with json format as buffer
     data_buff = df_sql.to_json(None, orient='records')
 
     return (data_buff)
-
 
 
 if __name__ == "__main__":

@@ -17,7 +17,6 @@ requirejs.config({
 });
 //
 
-
 requirejs(['d3', 'queue', 'jquery', 'underscore'],
 function(d3, queue, $, _) {
 
@@ -111,6 +110,10 @@ function(d3, queue, $, _) {
     data.forEach(function(d) {
       d.date = parseDate(d.timestamp);
     });
+
+    // Last date of update is printed to the page
+    var lastUpdate = data[data.length-1].date;
+    $('.aktualisierung').html(lastUpdate);
 
     color.domain(d3.keys(data[0]).filter(function(key) { return key !== "date"; }));
 
