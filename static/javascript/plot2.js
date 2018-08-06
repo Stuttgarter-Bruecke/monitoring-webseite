@@ -149,7 +149,10 @@ function(d3, queue, $, _) {
     // ---------------------------------------
 
     x.domain(d3.extent(data.map(function(d) { return d.date; })));
-    y.domain([0, d3.max(data.map(function(d) { return d.t_surf_mitte_oben; }))]);
+    y.domain([
+      d3.min(data.map(function(d) { return d.t_surf_mitte_oben; })),
+      d3.max(data.map(function(d) { return d.t_surf_mitte_oben; }))
+    ]);
     //y.domain([10,0]);
     x2.domain(x.domain());
     y2.domain(y.domain());
@@ -159,10 +162,16 @@ function(d3, queue, $, _) {
         d3.min(samples, function(c) { return d3.min(c.values, function(v) { return v.measure; }); }),
         d3.max(samples, function(c) { return d3.max(c.values, function(v) { return v.measure; }); })
     ]);
+    // y.domain(brush.extent())
 
+    // Define domain of the y-axis in the lower axis (brush)
     y2.domain([
-        d3.min(samplesContext, function(c) { return d3.min(c.values, function(v) { return v.measure; }); }),
-        d3.max(samplesContext, function(c) { return d3.max(c.values, function(v) { return v.measure; }); })
+        d3.min(samplesContext, function(c) {
+          return d3.min(c.values, function(v) { return v.measure; });
+        }),
+        d3.max(samplesContext, function(c) { 
+          return d3.max(c.values, function(v) { return v.measure; }); 
+        })
     ]);
 
     var sample = focus.selectAll(".sample")
