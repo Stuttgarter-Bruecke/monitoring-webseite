@@ -99,7 +99,7 @@ function(d3, queue, $, _) {
     // for the context
     .defer(d3.json, "/daten/"+currentSensor+"_20?nocache=" + (new Date()).getTime())
     // for the focus
-    .defer(d3.json, "/daten/"+currentSensor+"_1?nocache=" + (new Date()).getTime())
+    .defer(d3.json, "/daten/"+currentSensor+"_40?nocache=" + (new Date()).getTime())
     .await(makeGraphs);
 
   function makeGraphs(error, dataContext, data) {

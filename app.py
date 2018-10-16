@@ -114,11 +114,13 @@ def export_json(table=None, zoom=None):
 
     # Get the data from the database
     sqlString = "SELECT * FROM " + table
+
     # create data frame
     df_sql = pd.read_sql(sql=sqlString ,con=rv)
     #df_sql = df_sql[['timestamp', col_1, col_2, col_3]][0:7000:int(zoom)]
     df_sql = df_sql[0:-1:int(zoom)]
     # export data with json format as buffer
+    df_sql.sort_values(by='timestamp', inplace=True)
     data_buff = df_sql.to_json(None, orient='records')
 
     return (data_buff)
